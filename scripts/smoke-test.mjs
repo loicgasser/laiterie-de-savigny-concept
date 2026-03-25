@@ -39,15 +39,22 @@ const server = spawn('npx', ['astro', 'preview', '--port', '4322'], {
 });
 
 // Wait for server to be ready
-await new Promise((resolve) => {
-  server.stdout.on('data', (data) => {
-    if (data.toString().includes('4322')) resolve();
-  });
-  setTimeout(resolve, 5000); // fallback timeout
-});
+async function waitForServer(url, timeoutMs = 15000) {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    try {
+      execSync(`curl -sfI ${url} >/dev/null`);
+      return;
+    } catch {
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
+  throw new Error(`Preview server did not become ready at ${url}`);
+}
 
 let errors = 0;
 const BASE = 'http://localhost:4322/laiterie-de-savigny-concept';
+await waitForServer(`${BASE}/index.html`);
 
 try {
   const { chromium } = await import('playwright');
