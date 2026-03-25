@@ -9,7 +9,7 @@ export interface NavLink {
 }
 
 export interface SocialLink {
-  platform: 'twitter' | 'github' | 'linkedin' | 'mastodon' | 'youtube';
+  platform: 'twitter' | 'github' | 'linkedin' | 'mastodon' | 'youtube' | 'instagram';
   url: string;
   label?: string;
 }
@@ -48,6 +48,7 @@ export interface SiteConfig {
     postalCode: string;
     country: string;
     email: string;
+    phone?: string;
     responsiblePerson: string;
     responsibleRole?: string;
   };
@@ -62,56 +63,52 @@ export interface SiteConfig {
 }
 
 const config: SiteConfig = {
-  siteName: 'My Static Site',
-  siteUrl: 'https://example.com',
-  description: 'A fast, dark-themed static site built with Astro.',
-  language: 'en',
-  tagline: 'Build something great.',
-  ctaText: 'Get Started',
+  siteName: 'Laiterie de Savigny',
+  siteUrl: 'https://loicgasser.github.io/laiterie-de-savigny-concept',
+  description: 'Votre commerce de proximité à Savigny — fromages à la coupe, produits laitiers, fruits et légumes, épicerie locale et produits du terroir vaudois.',
+  language: 'fr',
+  tagline: 'Le goût du terroir, au cœur du village',
+  ctaText: 'Nous rendre visite',
   ctaUrl: '#contact',
 
   author: {
-    name: 'Your Name',
-    email: 'hello@example.com',
-    url: 'https://example.com',
-    role: 'Founder',
+    name: 'Laiterie de Savigny',
+    email: 'alaiterie@epicerieslocales.ch',
+    url: 'https://loicgasser.github.io/laiterie-de-savigny-concept',
   },
 
   analytics: {
     // gaTrackingId: 'G-XXXXXXXXXX',
   },
 
-  ads: {
-    // carbon: { serveId: 'CESI...' },
-    // adsense: { clientId: 'ca-pub-...' },
-  },
+  ads: {},
 
   social: [
-    { platform: 'github', url: 'https://github.com/your-username', label: 'GitHub' },
-    { platform: 'linkedin', url: 'https://linkedin.com/in/your-profile', label: 'LinkedIn' },
+    { platform: 'instagram', url: 'https://www.instagram.com/laiterie_savigny', label: 'Instagram' },
   ],
 
   legal: {
-    companyName: 'Your Company',
-    address: '123 Street Name',
-    locality: 'City',
-    postalCode: '00000',
-    country: 'Switzerland',
-    email: 'hello@example.com',
-    responsiblePerson: 'Your Name',
-    responsibleRole: 'Founder',
+    companyName: 'Laiterie de Savigny',
+    address: 'Rte des Miguettes 1',
+    locality: 'Savigny',
+    postalCode: '1073',
+    country: 'Suisse',
+    email: 'alaiterie@epicerieslocales.ch',
+    phone: '021 781 20 56',
+    responsiblePerson: 'Laiterie de Savigny',
   },
 
   nav: [
-    { label: 'Home', href: '/' },
-    { label: 'Privacy', href: '/privacy.html' },
-    { label: 'Impressum', href: '/impressum.html' },
+    { label: 'Accueil', href: '/' },
+    { label: 'Nos produits', href: '/#produits' },
+    { label: 'Notre histoire', href: '/#histoire' },
+    { label: 'Contact', href: '/#contact' },
   ],
 
   i18n: {
     enabled: false,
-    defaultLang: 'en',
-    languages: ['en'],
+    defaultLang: 'fr',
+    languages: ['fr'],
   },
 };
 

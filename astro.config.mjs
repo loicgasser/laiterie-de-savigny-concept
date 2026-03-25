@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
+  site: 'https://loicgasser.github.io',
+  base: '/laiterie-de-savigny-concept',
   output: 'static',
   build: {
     format: 'file',

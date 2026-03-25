@@ -2,103 +2,92 @@
 import Base from '../layouts/Base.astro';
 import config from '../config';
 
+const base = import.meta.env.BASE_URL;
 const gaId = config.analytics.gaTrackingId;
 ---
 
 <Base
-  title={`Privacy Policy — ${config.siteName}`}
-  description={`Privacy Policy for ${config.siteName} — how we handle your data, cookies, and analytics.`}
+  title={`Politique de confidentialité — ${config.siteName}`}
+  description={`Politique de confidentialité de ${config.siteName} — comment nous traitons vos données, cookies et analytics.`}
   jsonLd={[
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${config.siteUrl}/` },
-        { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: `${config.siteUrl}/privacy.html` },
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${config.siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Confidentialité', item: `${config.siteUrl}/privacy.html` },
       ],
     },
   ]}
 >
   <header class="article-header">
     <div class="container">
-      <a href="/" class="back-link">&larr; Home</a>
-      <h1>Privacy Policy</h1>
+      <a href={base} class="back-link">&larr; Accueil</a>
+      <h1>Politique de confidentialité</h1>
     </div>
   </header>
 
   <div class="article-body">
-    <p><strong>Last updated:</strong> {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+    <p><strong>Dernière mise à jour :</strong> {new Date().toLocaleDateString('fr-CH', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
-    <h2>1. Controller</h2>
+    <h2>1. Responsable</h2>
     <p>
-      The controller responsible for data processing on this website is:<br />
+      Le responsable du traitement des données sur ce site est :<br />
       <strong>{config.legal.companyName}</strong><br />
-      {config.legal.responsiblePerson}<br />
       {config.legal.address}<br />
       {config.legal.postalCode} {config.legal.locality}, {config.legal.country}<br />
-      Email: <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>
+      Email : <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>
     </p>
 
-    <h2>2. Data We Collect</h2>
-    <p>This website is a static informational site. We do not operate user accounts, login systems, or forms that collect personal data directly. The data we process is limited to:</p>
+    <h2>2. Données collectées</h2>
+    <p>Ce site est un site statique à vocation informative. Nous ne disposons pas de comptes utilisateurs, de systèmes de connexion ni de formulaires collectant des données personnelles. Les données que nous traitons se limitent à :</p>
     <ul>
-      {gaId && <li><strong>Analytics data</strong> — collected via Google Analytics 4 (GA4), only with your consent (see Section 4).</li>}
-      <li><strong>Server logs</strong> — your hosting provider may log IP addresses, request URLs, and user agent strings for security and operational purposes.</li>
+      {gaId && <li><strong>Données analytiques</strong> — collectées via Google Analytics 4 (GA4), uniquement avec votre consentement (voir Section 4).</li>}
+      <li><strong>Journaux serveur</strong> — votre hébergeur peut enregistrer les adresses IP, les URL de requête et les chaînes d'agent utilisateur à des fins de sécurité et d'exploitation.</li>
     </ul>
 
     <h2>3. Cookies</h2>
-    <p>This website uses cookies only when you consent to analytics tracking:</p>
+    <p>Ce site n'utilise des cookies que si vous consentez au suivi analytique :</p>
     <ul>
-      <li><strong>cookie_consent</strong> — stores your cookie consent preference (<code>accepted</code> or <code>declined</code>). Stored in localStorage. No expiration until cleared.</li>
-      {gaId && <li><strong>_ga, _ga_*</strong> — set by Google Analytics 4 when consent is granted. Used to distinguish users and sessions. Expire after 2 years and 24 hours respectively.</li>}
+      <li><strong>cookie_consent</strong> — stocke votre préférence de consentement aux cookies (<code>accepted</code> ou <code>declined</code>). Stocké dans le localStorage. Pas d'expiration jusqu'à suppression.</li>
+      {gaId && <li><strong>_ga, _ga_*</strong> — définis par Google Analytics 4 lorsque le consentement est accordé. Utilisés pour distinguer les utilisateurs et les sessions. Expirent respectivement après 2 ans et 24 heures.</li>}
     </ul>
-    <p>If you decline cookies, no analytics cookies are set and no analytics scripts load.</p>
+    <p>Si vous refusez les cookies, aucun cookie analytique n'est défini et aucun script analytique ne se charge.</p>
 
     {gaId && (
       <>
         <h2>4. Google Analytics</h2>
         <p>
-          We use Google Analytics 4 (measurement ID: <code>{gaId}</code>) to understand how visitors use our website. GA4 collects:
+          Nous utilisons Google Analytics 4 (ID de mesure : <code>{gaId}</code>) pour comprendre comment les visiteurs utilisent notre site.
         </p>
-        <ul>
-          <li>Pages visited and time spent</li>
-          <li>Referral source</li>
-          <li>Device type, browser, and operating system</li>
-          <li>Approximate geographic location (country/city level, derived from IP)</li>
-        </ul>
-        <p>
-          IP addresses are anonymized by Google. Data is processed by Google LLC in the United States under their
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
-        </p>
-        <p><strong>Data retention:</strong> Analytics data is retained for 14 months, then automatically deleted.</p>
       </>
     )}
 
-    <h2>{gaId ? '5' : '4'}. Legal Basis</h2>
-    <p>Under the Swiss Federal Act on Data Protection (nFADP, in force since 1 September 2023):</p>
+    <h2>{gaId ? '5' : '4'}. Base légale</h2>
+    <p>En vertu de la Loi fédérale suisse sur la protection des données (nLPD, en vigueur depuis le 1er septembre 2023) :</p>
     <ul>
-      {gaId && <li><strong>Analytics:</strong> Based on your consent (cookie banner). You may withdraw consent at any time by clearing your browser's localStorage or declining when the banner reappears.</li>}
-      <li><strong>Server logs:</strong> Based on our legitimate interest in maintaining website security and availability.</li>
+      {gaId && <li><strong>Analytics :</strong> Basé sur votre consentement (bannière de cookies). Vous pouvez retirer votre consentement à tout moment.</li>}
+      <li><strong>Journaux serveur :</strong> Basé sur notre intérêt légitime à maintenir la sécurité et la disponibilité du site.</li>
     </ul>
 
-    <h2>{gaId ? '6' : '5'}. Your Rights</h2>
-    <p>Under the Swiss nFADP, you have the right to:</p>
+    <h2>{gaId ? '6' : '5'}. Vos droits</h2>
+    <p>En vertu de la nLPD suisse, vous avez le droit de :</p>
     <ul>
-      <li>Request information about whether and what personal data we process about you</li>
-      <li>Request correction of inaccurate data</li>
-      <li>Request deletion of your data</li>
-      <li>Object to data processing</li>
-      <li>Request data portability</li>
+      <li>Demander des informations sur les données personnelles que nous traitons vous concernant</li>
+      <li>Demander la rectification de données inexactes</li>
+      <li>Demander la suppression de vos données</li>
+      <li>Vous opposer au traitement des données</li>
+      <li>Demander la portabilité des données</li>
     </ul>
-    <p>To exercise these rights, contact us at <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>.</p>
-    <p>You also have the right to lodge a complaint with the <strong>Federal Data Protection and Information Commissioner (FDPIC)</strong>.</p>
+    <p>Pour exercer ces droits, contactez-nous à <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>.</p>
+    <p>Vous avez également le droit de déposer une plainte auprès du <strong>Préposé fédéral à la protection des données et à la transparence (PFPDT)</strong>.</p>
 
-    <h2>{gaId ? '7' : '6'}. Third-Party Services</h2>
+    <h2>{gaId ? '7' : '6'}. Polices de caractères</h2>
     <ul>
-      <li><strong>Fonts</strong> — all fonts (Inter, Source Code Pro) are self-hosted on our servers. No requests are made to Google or other third-party font services.</li>
+      <li><strong>Polices</strong> — toutes les polices (Inter, Source Code Pro) sont hébergées sur nos propres serveurs. Aucune requête n'est effectuée vers Google ou d'autres services de polices tiers.</li>
     </ul>
 
-    <h2>{gaId ? '8' : '7'}. Changes to This Policy</h2>
-    <p>We may update this privacy policy from time to time. The "Last updated" date at the top indicates the most recent revision. Continued use of the website after changes constitutes acceptance.</p>
+    <h2>{gaId ? '8' : '7'}. Modifications</h2>
+    <p>Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. La date de « Dernière mise à jour » en haut de page indique la révision la plus récente.</p>
   </div>
 </Base>

@@ -1,31 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
 import config from '../config';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base
-  title={`Legal Notice (Impressum) — ${config.siteName}`}
-  description={`Legal notice (Impressum) for ${config.siteName} — company information and responsible person.`}
+  title={`Mentions légales — ${config.siteName}`}
+  description={`Mentions légales (Impressum) de ${config.siteName} — informations sur l'entreprise et personne responsable.`}
   jsonLd={[
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: `${config.siteUrl}/` },
-        { '@type': 'ListItem', position: 2, name: 'Legal Notice (Impressum)', item: `${config.siteUrl}/impressum.html` },
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: `${config.siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Mentions légales', item: `${config.siteUrl}/impressum.html` },
       ],
     },
   ]}
 >
   <header class="article-header">
     <div class="container">
-      <a href="/" class="back-link">&larr; Home</a>
-      <h1>Legal Notice (Impressum)</h1>
+      <a href={base} class="back-link">&larr; Accueil</a>
+      <h1>Mentions légales</h1>
     </div>
   </header>
 
   <div class="article-body">
-    <h2>Company Information</h2>
+    <h2>Informations sur l'entreprise</h2>
     <p>
       <strong>{config.legal.companyName}</strong><br />
       {config.legal.address}<br />
@@ -33,34 +35,31 @@ import config from '../config';
       {config.legal.country}
     </p>
 
-    <h2>Responsible Person</h2>
-    <p>
-      <strong>{config.legal.responsiblePerson}</strong><br />
-      {config.legal.responsibleRole && <>{config.legal.responsibleRole}</>}
-    </p>
-
     <h2>Contact</h2>
     <p>
-      Email: <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a><br />
-      Website: <a href={config.siteUrl}>{config.siteUrl.replace('https://', '')}</a>
+      Email : <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a><br />
+      {config.legal.phone && <>Téléphone : <a href={`tel:+41${config.legal.phone.replace(/\s/g, '').replace(/^0/, '')}`}>{config.legal.phone}</a><br /></>}
     </p>
 
-    <h2>Disclaimer</h2>
+    <h2>Avertissement</h2>
     <p>
-      The content of this website has been prepared with the greatest possible care. However, {config.legal.companyName} cannot guarantee the accuracy, completeness, or timeliness of the content provided. Use of the content is at the user's own risk.
+      Le contenu de ce site a été préparé avec le plus grand soin possible. Cependant, {config.legal.companyName} ne peut garantir l'exactitude, l'exhaustivité ou l'actualité du contenu fourni. L'utilisation du contenu se fait aux risques et périls de l'utilisateur.
     </p>
     <p>
-      Links to third-party websites are provided for convenience only. {config.legal.companyName} has no influence over the content of linked websites and accepts no responsibility for them.
+      <strong>Ce site est un concept non officiel</strong>, réalisé à titre de démonstration uniquement. Il n'est pas exploité par {config.legal.companyName}.
     </p>
-
-    <h2>Copyright</h2>
     <p>
-      The content and works on this website are subject to Swiss copyright law. Reproduction, editing, distribution, or any kind of use beyond the limits of copyright law requires written consent from {config.legal.companyName}.
+      Les liens vers des sites tiers sont fournis à titre indicatif uniquement. {config.legal.companyName} n'a aucune influence sur le contenu des sites liés et n'accepte aucune responsabilité à leur égard.
     </p>
 
-    <h2>Applicable Law</h2>
+    <h2>Droit d'auteur</h2>
     <p>
-      Swiss law applies. The place of jurisdiction is {config.legal.locality}, {config.legal.country}.
+      Le contenu et les œuvres de ce site sont soumis au droit d'auteur suisse. Toute reproduction, modification, distribution ou utilisation au-delà des limites du droit d'auteur nécessite le consentement écrit de l'auteur.
+    </p>
+
+    <h2>Droit applicable</h2>
+    <p>
+      Le droit suisse s'applique. Le for juridique est {config.legal.locality}, {config.legal.country}.
     </p>
   </div>
 </Base>

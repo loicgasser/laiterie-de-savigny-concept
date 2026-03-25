@@ -47,7 +47,7 @@ await new Promise((resolve) => {
 });
 
 let errors = 0;
-const BASE = 'http://localhost:4322';
+const BASE = 'http://localhost:4322/laiterie-de-savigny-concept';
 
 try {
   const { chromium } = await import('playwright');

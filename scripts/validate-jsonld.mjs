@@ -6,7 +6,7 @@ import { join } from 'path';
 // Configure required schemas per page.
 // Keys are relative paths from dist/. Values are arrays of required @type values.
 const REQUIRED_SCHEMAS = {
-  'index.html': ['WebSite', 'Organization'],
+  'index.html': ['WebSite', 'Organization', 'LocalBusiness'],
   'privacy.html': ['BreadcrumbList'],
   'impressum.html': ['BreadcrumbList'],
 };

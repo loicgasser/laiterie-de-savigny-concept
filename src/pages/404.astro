@@ -1,5 +1,7 @@
 ---
 import config from '../config';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -8,37 +10,31 @@ import config from '../config';
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>Page Not Found — {config.siteName}</title>
+<title>Page introuvable — {config.siteName}</title>
 <style>
   @font-face {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/fonts/inter-latin.woff2') format('woff2');
+    src: url('/laiterie-de-savigny-concept/fonts/inter-latin.woff2') format('woff2');
   }
   @font-face {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/fonts/inter-latin.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'Source Code Pro';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/source-code-pro-latin.woff2') format('woff2');
+    src: url('/laiterie-de-savigny-concept/fonts/inter-latin.woff2') format('woff2');
   }
   :root {
-    --bg: #0a0a0f;
-    --text: #e4e4e7;
-    --text-muted: #8b8b9e;
-    --accent: #00d4ff;
-    --cta: #e06287;
+    --bg: #F7F3EC;
+    --text: #2C1810;
+    --text-muted: #6B5B4E;
+    --accent: #3D6B35;
+    --cta: #C45B28;
+    --cta-hover: #D4692F;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-mono: "Source Code Pro", monospace;
+    --font-display: Georgia, "Times New Roman", serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -54,7 +50,7 @@ import config from '../config';
   }
   .container { max-width: 480px; }
   h1 {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: clamp(3rem, 10vw, 5rem);
     color: var(--cta);
     margin-bottom: 1rem;
@@ -70,15 +66,15 @@ import config from '../config';
     font-weight: 600;
     transition: background 0.2s;
   }
-  a:hover { background: #e87a9b; }
+  a:hover { background: var(--cta-hover); }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 </style>
 </head>
 <body>
   <main class="container">
     <h1>404</h1>
-    <p>This page doesn't exist. It might have been moved or you followed a broken link.</p>
-    <a href="/">Back to Home</a>
+    <p>Cette page n'existe pas. Elle a peut-être été déplacée ou vous avez suivi un lien cassé.</p>
+    <a href={base}>Retour à l'accueil</a>
   </main>
 </body>
 </html>

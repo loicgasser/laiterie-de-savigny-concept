@@ -1,21 +1,61 @@
 ---
 import Base from '../layouts/Base.astro';
 import config from '../config';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import type { FeatureItem } from '../components/FeatureGrid.astro';
 
-const tools: FeatureItem[] = [
-  { icon: '🔧', title: 'JSON Formatter', description: 'Beautify, minify, and validate JSON data instantly.', href: '/tools/json-formatter', tag: 'Popular' },
-  { icon: '🔐', title: 'Base64 Encoder', description: 'Encode and decode Base64 strings with ease.', href: '/tools/base64' },
-  { icon: '🔑', title: 'JWT Decoder', description: 'Inspect and debug JSON Web Tokens on the fly.', href: '/tools/jwt-decoder' },
-  { icon: '🧪', title: 'Regex Tester', description: 'Build, test, and debug regular expressions live.', href: '/tools/regex-tester', tag: 'New' },
-  { icon: '⏰', title: 'Cron Builder', description: 'Generate and explain cron schedule expressions.', href: '/tools/cron-builder' },
-  { icon: '🎨', title: 'Color Picker', description: 'Convert between HEX, RGB, HSL, and more.', href: '/tools/color-picker' },
+const categories = [
+  {
+    icon: '🧀',
+    title: 'Fromages à la coupe',
+    description: 'Gruyère AOP, tommes vaudoises, raclettes et spécialités affinées — découpés selon vos envies, avec le conseil du comptoir.',
+  },
+  {
+    icon: '🥛',
+    title: 'Produits laitiers',
+    description: 'Lait frais, yogourts artisanaux, beurre et crème de la région — la fraîcheur de nos producteurs locaux, chaque jour.',
+  },
+  {
+    icon: '🥬',
+    title: 'Fruits & légumes',
+    description: 'Récoltes de saison en circuit court — des maraîchers de la région directement à votre table, au rythme des saisons.',
+  },
+  {
+    icon: '🫙',
+    title: 'Épicerie & terroir',
+    description: 'Confitures, miel, pâtes, huiles et vins vaudois — une sélection soignée de produits artisanaux et locaux.',
+  },
+  {
+    icon: '🥖',
+    title: 'Pain & boulangerie',
+    description: 'Pains frais livrés quotidiennement et spécialités boulangères — le complément parfait de votre panier.',
+  },
+  {
+    icon: '🎁',
+    title: 'Paniers & cadeaux',
+    description: 'Composez un panier gourmand avec nos produits du terroir — une idée cadeau authentique, pour toutes les occasions.',
+  },
+];
+
+const reasons = [
+  {
+    number: '01',
+    title: 'Circuit court',
+    text: 'Nos produits viennent directement des producteurs de la région. Moins de kilomètres, plus de fraîcheur, un vrai soutien à l\'économie locale.',
+  },
+  {
+    number: '02',
+    title: 'Conseil personnalisé',
+    text: 'Chez nous, on vous connaît. On vous guide, on vous conseille, on vous fait découvrir — comme au marché, mais tous les jours.',
+  },
+  {
+    number: '03',
+    title: 'Qualité artisanale',
+    text: 'Chaque produit est sélectionné pour sa qualité et son authenticité. Pas de compromis, pas d\'industriel — que du vrai.',
+  },
 ];
 ---
 
 <Base
-  title={`${config.siteName} — ${config.description}`}
+  title={`${config.siteName} — ${config.tagline}`}
   description={config.description}
   headerVariant="transparent"
   jsonLd={[
@@ -41,34 +81,453 @@ const tools: FeatureItem[] = [
         streetAddress: config.legal.address,
         addressLocality: config.legal.locality,
         postalCode: config.legal.postalCode,
-        addressCountry: config.legal.country === 'Switzerland' ? 'CH' : config.legal.country,
+        addressCountry: 'CH',
       },
-      founder: {
-        '@type': 'Person',
-        name: config.author.name,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: config.siteName,
+      description: config.description,
+      url: config.siteUrl,
+      telephone: config.legal.phone,
+      email: config.legal.email,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: config.legal.address,
+        addressLocality: config.legal.locality,
+        postalCode: config.legal.postalCode,
+        addressCountry: 'CH',
       },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 46.538,
+        longitude: 6.687,
+      },
+      image: `${config.siteUrl}/images/og-default.jpg`,
+      priceRange: '$$',
     },
   ]}
 >
-  <section class="hero">
+  <!-- ═══════ HERO ═══════ -->
+  <section class="hero" id="accueil">
     <div class="container">
+      <p class="hero-eyebrow">Commerce de proximité &middot; Savigny, Vaud</p>
       <h1>
-        {config.tagline.split(' ').slice(0, -1).join(' ')}{' '}
-        <span class="accent">{config.tagline.split(' ').slice(-1)[0]}</span>
+        Le goût du terroir,<br />
+        <span class="accent">au cœur du village</span>
       </h1>
-      <p>{config.description}</p>
+      <p>
+        Fromages à la coupe, produits laitiers frais, fruits et légumes de saison, épicerie fine et terroir vaudois — le meilleur de nos producteurs locaux, à deux pas de chez vous.
+      </p>
       <div class="hero-actions">
-        <a href={config.ctaUrl} class="btn btn-primary">{config.ctaText}</a>
+        <a href="#contact" class="btn btn-primary">Nous rendre visite</a>
+        <a href="#produits" class="btn btn-secondary">Découvrir nos produits</a>
+      </div>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="hero-blob">
+        <path fill="rgba(61,107,53,0.06)" d="M45.3,-62.5C57.5,-55.1,65.2,-39.6,69.7,-23.4C74.2,-7.2,75.4,9.7,70.2,24.3C65,38.9,53.3,51.2,39.6,59.5C25.9,67.8,10.3,72.2,-5.5,69.1C-21.3,66.1,-37.3,55.7,-49.8,43.2C-62.4,30.7,-71.5,16.2,-73.3,0.3C-75.1,-15.5,-69.6,-32.5,-58.6,-43.8C-47.7,-55.1,-31.3,-60.7,-15.8,-63.8C-0.3,-66.9,14.4,-67.5,27.8,-65.2C41.2,-62.9,53.3,-57.7,45.3,-62.5Z" transform="translate(100 100)" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════ POURQUOI NOUS ═══════ -->
+  <section class="reasons-section" id="pourquoi">
+    <div class="container">
+      <p class="section-label fade-in">Nos engagements</p>
+      <h2 class="section-title fade-in">Pourquoi choisir votre laiterie ?</h2>
+      <p class="section-subtitle fade-in">
+        Depuis des générations, la laiterie est le cœur battant du village. Un lieu de rencontre, de confiance et de saveurs authentiques.
+      </p>
+      <div class="reasons-grid">
+        {reasons.map((reason) => (
+          <div class="reason-item fade-in">
+            <span class="reason-number">{reason.number}</span>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section>
+  <!-- ═══════ PRODUITS ═══════ -->
+  <section class="products-section" id="produits">
     <div class="container">
-      <p class="section-label fade-in">Tools</p>
-      <h2 class="section-title fade-in">Developer Toolkit</h2>
-      <p class="section-subtitle fade-in">A collection of handy utilities for your daily workflow.</p>
-      <FeatureGrid items={tools} columns={3} variant="card" />
+      <p class="section-label fade-in">Nos produits</p>
+      <h2 class="section-title fade-in">Du producteur à votre table</h2>
+      <p class="section-subtitle fade-in">
+        Une sélection rigoureuse de produits frais et locaux, renouvelée au fil des saisons et des arrivages de nos partenaires.
+      </p>
+      <div class="card-grid">
+        {categories.map((cat) => (
+          <div class="card fade-in">
+            <div class="icon">{cat.icon}</div>
+            <h3>{cat.title}</h3>
+            <p>{cat.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ HISTOIRE ═══════ -->
+  <section class="story-section" id="histoire">
+    <div class="container">
+      <div class="story-layout">
+        <div class="story-visual fade-in" aria-hidden="true">
+          <div class="story-placeholder">
+            <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="500" rx="16" fill="rgba(61,107,53,0.06)"/>
+              <path d="M120 280 C140 240, 180 220, 200 230 C220 240, 260 260, 280 240" stroke="rgba(61,107,53,0.2)" stroke-width="2" fill="none"/>
+              <circle cx="200" cy="220" r="60" fill="rgba(61,107,53,0.04)" stroke="rgba(61,107,53,0.12)" stroke-width="1"/>
+              <text x="200" y="228" text-anchor="middle" font-size="48" fill="rgba(61,107,53,0.3)">🏔️</text>
+              <text x="200" y="380" text-anchor="middle" font-size="13" font-family="Georgia, serif" fill="rgba(61,107,53,0.35)">Savigny, Vaud</text>
+            </svg>
+          </div>
+        </div>
+        <div class="story-content">
+          <p class="section-label fade-in">Notre histoire</p>
+          <h2 class="section-title fade-in">Un commerce ancré dans son terroir</h2>
+          <p class="fade-in">
+            La Laiterie de Savigny perpétue une tradition bien vivante : celle du commerce de village où l'on prend le temps. Le temps de choisir, de discuter, de découvrir ce que nos producteurs ont de meilleur à offrir.
+          </p>
+          <p class="fade-in">
+            Installée au cœur de Savigny, notre épicerie rassemble le meilleur du terroir vaudois — des fromages affinés avec soin aux légumes récoltés le matin même. Chaque produit raconte une histoire, celle d'un artisan, d'un paysan, d'un savoir-faire transmis.
+          </p>
+          <p class="fade-in">
+            Plus qu'un magasin, la laiterie est un lieu de vie. On y vient pour ses courses, mais aussi pour un sourire, un conseil, ou simplement pour se sentir chez soi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <p class="section-label fade-in">Informations pratiques</p>
+      <h2 class="section-title fade-in">Venez nous voir</h2>
+      <p class="section-subtitle fade-in">
+        La laiterie vous accueille au centre du village de Savigny. Passez nous dire bonjour !
+      </p>
+      <div class="contact-grid">
+        <div class="contact-card fade-in">
+          <h3>Adresse</h3>
+          <p>
+            Rte des Miguettes 1<br />
+            1073 Savigny<br />
+            Suisse
+          </p>
+        </div>
+        <div class="contact-card fade-in">
+          <h3>Téléphone</h3>
+          <p>
+            <a href="tel:+41217812056">021 781 20 56</a>
+          </p>
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:alaiterie@epicerieslocales.ch">alaiterie@epicerieslocales.ch</a>
+          </p>
+        </div>
+        <div class="contact-card fade-in">
+          <h3>Suivez-nous</h3>
+          <p>
+            Retrouvez nos arrivages, nos nouveautés et un peu de notre quotidien sur Instagram.
+          </p>
+          <a href="https://www.instagram.com/laiterie_savigny" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top: 12px; display: inline-flex; gap: 8px; align-items: center;">
+            <svg width="16" height="16" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8 0-14.9 12-26.8 26.8-26.8 14.9 0 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+            @laiterie_savigny
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CTA FINAL ═══════ -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2>Envie de fraîcheur et de terroir ?</h2>
+        <p>Passez à la laiterie — on vous accueille avec plaisir, du lundi au samedi.</p>
+        <a href="tel:+41217812056" class="btn btn-primary" style="margin-top: 8px;">
+          Appelez-nous : 021 781 20 56
+        </a>
+      </div>
     </div>
   </section>
 </Base>
+
+<Fragment slot="scripts">
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+</script>
+</Fragment>
+
+<style>
+  /* ── Hero extras ── */
+
+  .hero-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fade-up 0.8s var(--ease-out) 0.2s forwards;
+  }
+
+  .hero h1 {
+    opacity: 0;
+    animation: fade-up 0.8s var(--ease-out) 0.35s forwards;
+  }
+
+  .hero > .container > p {
+    opacity: 0;
+    animation: fade-up 0.8s var(--ease-out) 0.5s forwards;
+  }
+
+  .hero-actions {
+    opacity: 0;
+    animation: fade-up 0.8s var(--ease-out) 0.65s forwards;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-decoration {
+    position: absolute;
+    right: -5%;
+    top: 15%;
+    width: 45%;
+    max-width: 500px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  .hero-blob {
+    width: 100%;
+    height: auto;
+    animation: blob-float 15s ease-in-out infinite;
+  }
+
+  @keyframes blob-float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(10px, -15px) rotate(3deg); }
+    66% { transform: translate(-8px, 10px) rotate(-2deg); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-decoration {
+      display: none;
+    }
+  }
+
+  /* ── Reasons section ── */
+  .reasons-section {
+    background: var(--bg-warm);
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+
+  .reason-item {
+    position: relative;
+  }
+
+  .reason-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: rgba(61, 107, 53, 0.12);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .reason-item h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .reason-item p {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 768px) {
+    .reasons-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  /* ── Products section ── */
+  .products-section {
+    background: var(--bg);
+  }
+
+  /* ── Story section ── */
+  .story-section {
+    background: var(--bg-warm);
+  }
+
+  .story-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .story-placeholder {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .story-placeholder svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .story-content .section-label {
+    margin-bottom: 10px;
+  }
+
+  .story-content .section-title {
+    margin-bottom: 24px;
+  }
+
+  .story-content p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 900px) {
+    .story-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .story-visual {
+      order: -1;
+      max-width: 320px;
+    }
+  }
+
+  /* ── Contact section ── */
+  .contact-section {
+    background: var(--bg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px 28px;
+  }
+
+  .contact-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .contact-card h3:not(:first-child) {
+    margin-top: 20px;
+  }
+
+  .contact-card p {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+
+  .contact-card a {
+    color: var(--accent);
+  }
+
+  .contact-card a:hover {
+    color: var(--cta);
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Final CTA ── */
+  .final-cta {
+    padding: 0 0 var(--space-4xl);
+  }
+
+  .cta-banner {
+    background: linear-gradient(135deg, var(--bg-warm) 0%, rgba(61, 107, 53, 0.06) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 56px 48px;
+    text-align: center;
+  }
+
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .cta-banner p {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .cta-banner {
+      padding: 40px 24px;
+    }
+  }
+</style>
