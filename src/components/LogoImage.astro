@@ -1,0 +1,58 @@
+---
+/**
+ * Laiterie de Savigny Logo Image
+ * Real hand-drawn logo from storefront signage.
+ */
+
+interface Props {
+  size?: 'small' | 'medium';
+}
+
+const { size = 'medium' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<img
+  class={`logo-image logo-${size}`}
+  src={`${base}/images/logo.jpg`}
+  alt="Laiterie de Savigny"
+  width="240"
+  height="240"
+/>
+
+<style>
+  .logo-image {
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;
+  }
+
+  .logo-small {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-medium {
+    width: 52px;
+    height: 52px;
+  }
+
+  @media (min-width: 769px) {
+    .logo-medium {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .logo-medium {
+      width: 44px;
+      height: 44px;
+    }
+
+    .logo-small {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

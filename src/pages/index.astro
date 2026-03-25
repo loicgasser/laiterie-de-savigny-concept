@@ -82,28 +82,17 @@ const categories = [
   <!-- ═══════ HERO ═══════ -->
   <section class="hero" id="accueil">
     <div class="container hero-layout">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Savigny, Vaud</p>
-        <h1>
-          La laiterie<br />
-          du village
-        </h1>
-        <p>
-          Fromages à la coupe, produits laitiers, fruits et légumes de saison, et un coin épicerie avec des produits de la région. De quoi faire ses courses simplement, au village.
-        </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Passer nous voir</a>
-          <a href="#produits" class="btn btn-secondary">Nos produits</a>
-        </div>
-      </div>
-      <div class="hero-image fade-in">
-        <img
-          src={`${base}/images/storefront.jpg`}
-          alt="Devanture de la Laiterie de Savigny"
-          loading="eager"
-          width="560"
-          height="400"
-        />
+      <p class="hero-eyebrow">Savigny, Vaud</p>
+      <h1>
+        La laiterie<br />
+        du village
+      </h1>
+      <p class="hero-description">
+        Fromages à la coupe, produits laitiers, fruits et légumes de saison, et un coin épicerie avec des produits de la région. De quoi faire ses courses simplement, au village.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Passer nous voir</a>
+        <a href="#produits" class="btn btn-secondary">Nos produits</a>
       </div>
     </div>
   </section>
@@ -259,28 +248,46 @@ const categories = [
 
 <style>
   /* ── Hero ── */
+  .hero {
+    padding: var(--space-4xl) 0;
+  }
+
+  .hero-layout {
+    max-width: 700px;
+  }
+
   .hero-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: var(--text-muted);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.2s forwards;
   }
 
   .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 32px;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.3s forwards;
   }
 
-  .hero-text > p {
+  .hero-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 40px;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.4s forwards;
   }
 
   .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.5s forwards;
   }
@@ -296,38 +303,41 @@ const categories = [
     }
   }
 
-  .hero-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-
-  .hero-image {
-    overflow: hidden;
-  }
-
-  .hero-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    filter: grayscale(30%) contrast(1.05);
-    transition: filter 0.5s var(--ease-out);
-  }
-
-  .hero-image:hover img {
-    filter: grayscale(0%) contrast(1);
-  }
-
   @media (max-width: 900px) {
-    .hero-layout {
-      grid-template-columns: 1fr;
-      gap: 40px;
+    .hero {
+      padding: var(--space-3xl) 0;
     }
 
-    .hero-image {
-      max-width: 100%;
-      order: -1;
+    .hero h1 {
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      margin-bottom: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: var(--space-2xl) 0;
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-description {
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .hero-actions .btn {
+      width: 100%;
     }
   }
 

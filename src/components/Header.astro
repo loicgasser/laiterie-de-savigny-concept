@@ -1,6 +1,6 @@
 ---
 import config from '../config';
-import Logo from './Logo.astro';
+import LogoImage from './LogoImage.astro';
 
 interface Props {
   variant?: 'transparent' | 'solid';
@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL;
   <nav class={navClass} id="navbar">
     <div class="container">
       <a href={base} class="nav-brand">
-        <Logo size="medium" showText={false} />
+        <LogoImage size="medium" />
       </a>
       <button class="nav-toggle" aria-label="Menu de navigation" aria-expanded="false">
         <svg width="22" height="22" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M0 96C0 78.3 14.3 64 32 64h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zm0 160c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zm448 160c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h384c17.7 0 32 14.3 32 32z"/></svg>
