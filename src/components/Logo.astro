@@ -1,0 +1,108 @@
+---
+/**
+ * Laiterie de Savigny Logo
+ * Monochrome SVG badge with dairy/produce motif
+ */
+
+interface Props {
+  size?: 'small' | 'medium';
+  showText?: boolean;
+}
+
+const { size = 'medium', showText = true } = Astro.props;
+---
+
+<svg
+  class={`logo logo-${size}${showText ? '' : ' logo-icon-only'}`}
+  viewBox="0 0 240 240"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Laiterie de Savigny"
+>
+  <!-- Outer circle -->
+  <circle cx="120" cy="120" r="115" fill="none" stroke="currentColor" stroke-width="2" />
+
+  <!-- Dairy/produce items (simplified line art) -->
+  <!-- Cheese wedge -->
+  <g transform="translate(70, 95)">
+    <path d="M 0 0 L 20 0 L 18 15 L 2 15 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+    <circle cx="8" cy="5" r="2" fill="none" stroke="currentColor" stroke-width="1" />
+    <circle cx="14" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="1" />
+  </g>
+
+  <!-- Milk bottle -->
+  <g transform="translate(105, 85)">
+    <rect x="0" y="8" width="12" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" rx="1" />
+    <path d="M 3 0 L 9 0 L 9 8 L 3 8 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+    <path d="M 5 -2 Q 5 0 7 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Apple/tomato -->
+  <g transform="translate(155, 100)">
+    <circle cx="6" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5" />
+    <path d="M 6 2 Q 8 1 9 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Text (shown only when showText is true) -->
+  {showText && (
+    <>
+      <!-- Main brand text -->
+      <text
+        x="120"
+        y="155"
+        font-size="24"
+        font-weight="400"
+        text-anchor="middle"
+        fill="currentColor"
+        font-family="inherit"
+        letter-spacing="-0.3"
+      >
+        La Laiterie
+      </text>
+
+      <!-- Subtext -->
+      <text
+        x="120"
+        y="178"
+        font-size="14"
+        font-weight="300"
+        text-anchor="middle"
+        fill="currentColor"
+        font-family="inherit"
+        letter-spacing="0.5"
+      >
+        de Savigny
+      </text>
+    </>
+  )}
+</svg>
+
+<style>
+  .logo {
+    color: var(--color-text);
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .logo-small {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-medium {
+    width: 56px;
+    height: 56px;
+  }
+
+  .logo-icon-only {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (max-width: 640px) {
+    .logo-medium {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>
