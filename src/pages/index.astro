@@ -22,6 +22,16 @@ const categories = [
     description: 'Confitures, miel, pâtes, huiles, vins vaudois — des produits choisis chez des artisans qu\'on connaît.',
   },
 ];
+
+const openingHours = [
+  ['Lundi', '08:30–12:30 · 16:00–19:00'],
+  ['Mardi', '08:30–12:30 · 16:00–19:00'],
+  ['Mercredi', '08:30–12:30 · 16:00–19:00'],
+  ['Jeudi', '08:30–12:30 · 16:00–19:00'],
+  ['Vendredi', '08:30–12:30 · 16:00–19:00'],
+  ['Samedi', '08:30–14:00'],
+  ['Dimanche', 'Fermé'],
+];
 ---
 
 <Base
@@ -208,6 +218,17 @@ const categories = [
           <p>
             <a href="mailto:alaiterie@epicerieslocales.ch">alaiterie@epicerieslocales.ch</a>
           </p>
+        </div>
+        <div class="contact-card fade-in">
+          <h3>Horaires</h3>
+          <ul class="hours-list">
+            {openingHours.map(([day, hours]) => (
+              <li>
+                <span>{day}</span>
+                <span>{hours}</span>
+              </li>
+            ))}
+          </ul>
         </div>
         <div class="contact-card fade-in">
           <h3>Instagram</h3>
@@ -512,6 +533,29 @@ const categories = [
     color: var(--text-muted);
     font-size: 0.9rem;
     line-height: 1.7;
+  }
+
+  .hours-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+
+  .hours-list li span:last-child {
+    text-align: right;
+    color: var(--text);
   }
 
   .contact-card a {
