@@ -27,12 +27,9 @@ const base = import.meta.env.BASE_URL;
     src: url('/laiterie-de-savigny-concept/fonts/inter-latin.woff2') format('woff2');
   }
   :root {
-    --bg: #F7F3EC;
-    --text: #2C1810;
-    --text-muted: #6B5B4E;
-    --accent: #3D6B35;
-    --cta: #C45B28;
-    --cta-hover: #D4692F;
+    --bg: #F6F5F3;
+    --text: #1A1A1A;
+    --text-muted: #5C5C5C;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: Georgia, "Times New Roman", serif;
   }
@@ -52,28 +49,31 @@ const base = import.meta.env.BASE_URL;
   h1 {
     font-family: var(--font-display);
     font-size: clamp(3rem, 10vw, 5rem);
-    color: var(--cta);
+    color: var(--text);
     margin-bottom: 1rem;
+    letter-spacing: -0.03em;
   }
-  p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
+  p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; }
   a {
     display: inline-block;
     padding: 12px 32px;
-    background: var(--cta);
-    color: #fff;
+    background: var(--text);
+    color: var(--bg);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 3px;
     font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
     transition: background 0.2s;
   }
-  a:hover { background: var(--cta-hover); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a:hover { background: #000; }
+  a:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
 </style>
 </head>
 <body>
   <main class="container">
     <h1>404</h1>
-    <p>Cette page n'existe pas. Elle a peut-être été déplacée ou vous avez suivi un lien cassé.</p>
+    <p>Cette page n'existe pas.</p>
     <a href={base}>Retour à l'accueil</a>
   </main>
 </body>

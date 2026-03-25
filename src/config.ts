@@ -65,9 +65,9 @@ export interface SiteConfig {
 const config: SiteConfig = {
   siteName: 'Laiterie de Savigny',
   siteUrl: 'https://loicgasser.github.io/laiterie-de-savigny-concept',
-  description: 'Votre commerce de proximité à Savigny — fromages à la coupe, produits laitiers, fruits et légumes, épicerie locale et produits du terroir vaudois.',
+  description: 'Commerce de proximité à Savigny — fromages à la coupe, produits laitiers, fruits et légumes de saison, épicerie locale.',
   language: 'fr',
-  tagline: 'Le goût du terroir, au cœur du village',
+  tagline: 'La laiterie du village',
   ctaText: 'Nous rendre visite',
   ctaUrl: '#contact',
 
