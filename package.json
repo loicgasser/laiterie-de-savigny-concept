@@ -1,0 +1,20 @@
+{
+  "name": "astro-static-template",
+  "version": "1.0.0",
+  "description": "Astro static site template — dark theme, SEO-ready, Swiss law compliant",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/validate-jsonld.mjs",
+    "preview": "astro preview",
+    "validate:schema": "node scripts/validate-jsonld.mjs",
+    "test": "node scripts/smoke-test.mjs",
+    "ship": "npm run build && node scripts/smoke-test.mjs && bash scripts/deploy.sh",
+    "add-font": "node scripts/add-font.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.0.8"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  }
+}

@@ -1,0 +1,31 @@
+---
+interface Props {
+  productName: string;
+  amazonUs?: string;
+  amazonDe?: string;
+  amazonFr?: string;
+  galaxus?: string;
+  fallbackUrl?: string;
+}
+
+const { productName, amazonUs, amazonDe, amazonFr, galaxus, fallbackUrl } = Astro.props;
+
+const links = [
+  amazonUs && { label: 'Amazon US', url: amazonUs },
+  amazonDe && { label: 'Amazon DE', url: amazonDe },
+  amazonFr && { label: 'Amazon FR', url: amazonFr },
+  galaxus && { label: 'Galaxus', url: galaxus },
+  fallbackUrl && { label: 'Buy', url: fallbackUrl },
+].filter(Boolean) as { label: string; url: string }[];
+---
+
+{links.length > 0 && (
+  <div class="affiliate-links">
+    <span>{productName}:</span>
+    {links.map((link) => (
+      <a href={link.url} target="_blank" rel="noopener noreferrer nofollow sponsored">
+        {link.label} &rarr;
+      </a>
+    ))}
+  </div>
+)}

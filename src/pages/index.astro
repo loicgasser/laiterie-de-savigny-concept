@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../config';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import type { FeatureItem } from '../components/FeatureGrid.astro';
+
+const tools: FeatureItem[] = [
+  { icon: '🔧', title: 'JSON Formatter', description: 'Beautify, minify, and validate JSON data instantly.', href: '/tools/json-formatter', tag: 'Popular' },
+  { icon: '🔐', title: 'Base64 Encoder', description: 'Encode and decode Base64 strings with ease.', href: '/tools/base64' },
+  { icon: '🔑', title: 'JWT Decoder', description: 'Inspect and debug JSON Web Tokens on the fly.', href: '/tools/jwt-decoder' },
+  { icon: '🧪', title: 'Regex Tester', description: 'Build, test, and debug regular expressions live.', href: '/tools/regex-tester', tag: 'New' },
+  { icon: '⏰', title: 'Cron Builder', description: 'Generate and explain cron schedule expressions.', href: '/tools/cron-builder' },
+  { icon: '🎨', title: 'Color Picker', description: 'Convert between HEX, RGB, HSL, and more.', href: '/tools/color-picker' },
+];
+---
+
+<Base
+  title={`${config.siteName} — ${config.description}`}
+  description={config.description}
+  headerVariant="transparent"
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: config.siteName,
+      url: config.siteUrl,
+      publisher: {
+        '@type': 'Organization',
+        name: config.siteName,
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: config.legal.companyName,
+      url: config.siteUrl,
+      email: config.legal.email,
+      description: config.description,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: config.legal.address,
+        addressLocality: config.legal.locality,
+        postalCode: config.legal.postalCode,
+        addressCountry: config.legal.country === 'Switzerland' ? 'CH' : config.legal.country,
+      },
+      founder: {
+        '@type': 'Person',
+        name: config.author.name,
+      },
+    },
+  ]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>
+        {config.tagline.split(' ').slice(0, -1).join(' ')}{' '}
+        <span class="accent">{config.tagline.split(' ').slice(-1)[0]}</span>
+      </h1>
+      <p>{config.description}</p>
+      <div class="hero-actions">
+        <a href={config.ctaUrl} class="btn btn-primary">{config.ctaText}</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <p class="section-label fade-in">Tools</p>
+      <h2 class="section-title fade-in">Developer Toolkit</h2>
+      <p class="section-subtitle fade-in">A collection of handy utilities for your daily workflow.</p>
+      <FeatureGrid items={tools} columns={3} variant="card" />
+    </div>
+  </section>
+</Base>

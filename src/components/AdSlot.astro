@@ -1,0 +1,31 @@
+---
+interface Props {
+  slot: string;
+  network?: 'carbon' | 'adsense' | 'none';
+  width?: number;
+  height?: number;
+}
+
+const { slot, network = 'none', width = 300, height = 250 } = Astro.props;
+---
+
+{network !== 'none' && (
+  <div
+    class="ad-slot"
+    data-ad-slot={slot}
+    data-ad-network={network}
+    style={`min-height: ${height}px; min-width: ${width}px; max-width: 100%;`}
+  >
+    {network === 'carbon' && (
+      <script async type="text/javascript" src={`//cdn.carbonads.com/carbon.js?serve=${slot}&placement=example`} id="_carbonads_js"></script>
+    )}
+    {network === 'adsense' && (
+      <ins
+        class="adsbygoogle"
+        style={`display:inline-block;width:${width}px;height:${height}px`}
+        data-ad-client={slot.split('/')[0]}
+        data-ad-slot={slot.split('/')[1] || slot}
+      ></ins>
+    )}
+  </div>
+)}

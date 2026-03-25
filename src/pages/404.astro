@@ -1,0 +1,84 @@
+---
+import config from '../config';
+---
+
+<!DOCTYPE html>
+<html lang={config.language}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Page Not Found — {config.siteName}</title>
+<style>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/inter-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/inter-latin.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Source Code Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/source-code-pro-latin.woff2') format('woff2');
+  }
+  :root {
+    --bg: #0a0a0f;
+    --text: #e4e4e7;
+    --text-muted: #8b8b9e;
+    --accent: #00d4ff;
+    --cta: #e06287;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "Source Code Pro", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .container { max-width: 480px; }
+  h1 {
+    font-family: var(--font-mono);
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: var(--cta);
+    margin-bottom: 1rem;
+  }
+  p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
+  a {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--cta);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  a:hover { background: #e87a9b; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+  <main class="container">
+    <h1>404</h1>
+    <p>This page doesn't exist. It might have been moved or you followed a broken link.</p>
+    <a href="/">Back to Home</a>
+  </main>
+</body>
+</html>

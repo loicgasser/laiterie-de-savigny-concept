@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../config';
+
+const gaId = config.analytics.gaTrackingId;
+---
+
+<Base
+  title={`Privacy Policy — ${config.siteName}`}
+  description={`Privacy Policy for ${config.siteName} — how we handle your data, cookies, and analytics.`}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${config.siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: `${config.siteUrl}/privacy.html` },
+      ],
+    },
+  ]}
+>
+  <header class="article-header">
+    <div class="container">
+      <a href="/" class="back-link">&larr; Home</a>
+      <h1>Privacy Policy</h1>
+    </div>
+  </header>
+
+  <div class="article-body">
+    <p><strong>Last updated:</strong> {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
+    <h2>1. Controller</h2>
+    <p>
+      The controller responsible for data processing on this website is:<br />
+      <strong>{config.legal.companyName}</strong><br />
+      {config.legal.responsiblePerson}<br />
+      {config.legal.address}<br />
+      {config.legal.postalCode} {config.legal.locality}, {config.legal.country}<br />
+      Email: <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>
+    </p>
+
+    <h2>2. Data We Collect</h2>
+    <p>This website is a static informational site. We do not operate user accounts, login systems, or forms that collect personal data directly. The data we process is limited to:</p>
+    <ul>
+      {gaId && <li><strong>Analytics data</strong> — collected via Google Analytics 4 (GA4), only with your consent (see Section 4).</li>}
+      <li><strong>Server logs</strong> — your hosting provider may log IP addresses, request URLs, and user agent strings for security and operational purposes.</li>
+    </ul>
+
+    <h2>3. Cookies</h2>
+    <p>This website uses cookies only when you consent to analytics tracking:</p>
+    <ul>
+      <li><strong>cookie_consent</strong> — stores your cookie consent preference (<code>accepted</code> or <code>declined</code>). Stored in localStorage. No expiration until cleared.</li>
+      {gaId && <li><strong>_ga, _ga_*</strong> — set by Google Analytics 4 when consent is granted. Used to distinguish users and sessions. Expire after 2 years and 24 hours respectively.</li>}
+    </ul>
+    <p>If you decline cookies, no analytics cookies are set and no analytics scripts load.</p>
+
+    {gaId && (
+      <>
+        <h2>4. Google Analytics</h2>
+        <p>
+          We use Google Analytics 4 (measurement ID: <code>{gaId}</code>) to understand how visitors use our website. GA4 collects:
+        </p>
+        <ul>
+          <li>Pages visited and time spent</li>
+          <li>Referral source</li>
+          <li>Device type, browser, and operating system</li>
+          <li>Approximate geographic location (country/city level, derived from IP)</li>
+        </ul>
+        <p>
+          IP addresses are anonymized by Google. Data is processed by Google LLC in the United States under their
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+        </p>
+        <p><strong>Data retention:</strong> Analytics data is retained for 14 months, then automatically deleted.</p>
+      </>
+    )}
+
+    <h2>{gaId ? '5' : '4'}. Legal Basis</h2>
+    <p>Under the Swiss Federal Act on Data Protection (nFADP, in force since 1 September 2023):</p>
+    <ul>
+      {gaId && <li><strong>Analytics:</strong> Based on your consent (cookie banner). You may withdraw consent at any time by clearing your browser's localStorage or declining when the banner reappears.</li>}
+      <li><strong>Server logs:</strong> Based on our legitimate interest in maintaining website security and availability.</li>
+    </ul>
+
+    <h2>{gaId ? '6' : '5'}. Your Rights</h2>
+    <p>Under the Swiss nFADP, you have the right to:</p>
+    <ul>
+      <li>Request information about whether and what personal data we process about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Object to data processing</li>
+      <li>Request data portability</li>
+    </ul>
+    <p>To exercise these rights, contact us at <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a>.</p>
+    <p>You also have the right to lodge a complaint with the <strong>Federal Data Protection and Information Commissioner (FDPIC)</strong>.</p>
+
+    <h2>{gaId ? '7' : '6'}. Third-Party Services</h2>
+    <ul>
+      <li><strong>Fonts</strong> — all fonts (Inter, Source Code Pro) are self-hosted on our servers. No requests are made to Google or other third-party font services.</li>
+    </ul>
+
+    <h2>{gaId ? '8' : '7'}. Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. The "Last updated" date at the top indicates the most recent revision. Continued use of the website after changes constitutes acceptance.</p>
+  </div>
+</Base>

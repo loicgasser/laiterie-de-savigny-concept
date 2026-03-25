@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../config';
+---
+
+<Base
+  title={`Legal Notice (Impressum) — ${config.siteName}`}
+  description={`Legal notice (Impressum) for ${config.siteName} — company information and responsible person.`}
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${config.siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Legal Notice (Impressum)', item: `${config.siteUrl}/impressum.html` },
+      ],
+    },
+  ]}
+>
+  <header class="article-header">
+    <div class="container">
+      <a href="/" class="back-link">&larr; Home</a>
+      <h1>Legal Notice (Impressum)</h1>
+    </div>
+  </header>
+
+  <div class="article-body">
+    <h2>Company Information</h2>
+    <p>
+      <strong>{config.legal.companyName}</strong><br />
+      {config.legal.address}<br />
+      {config.legal.postalCode} {config.legal.locality}<br />
+      {config.legal.country}
+    </p>
+
+    <h2>Responsible Person</h2>
+    <p>
+      <strong>{config.legal.responsiblePerson}</strong><br />
+      {config.legal.responsibleRole && <>{config.legal.responsibleRole}</>}
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Email: <a href={`mailto:${config.legal.email}`}>{config.legal.email}</a><br />
+      Website: <a href={config.siteUrl}>{config.siteUrl.replace('https://', '')}</a>
+    </p>
+
+    <h2>Disclaimer</h2>
+    <p>
+      The content of this website has been prepared with the greatest possible care. However, {config.legal.companyName} cannot guarantee the accuracy, completeness, or timeliness of the content provided. Use of the content is at the user's own risk.
+    </p>
+    <p>
+      Links to third-party websites are provided for convenience only. {config.legal.companyName} has no influence over the content of linked websites and accepts no responsibility for them.
+    </p>
+
+    <h2>Copyright</h2>
+    <p>
+      The content and works on this website are subject to Swiss copyright law. Reproduction, editing, distribution, or any kind of use beyond the limits of copyright law requires written consent from {config.legal.companyName}.
+    </p>
+
+    <h2>Applicable Law</h2>
+    <p>
+      Swiss law applies. The place of jurisdiction is {config.legal.locality}, {config.legal.country}.
+    </p>
+  </div>
+</Base>

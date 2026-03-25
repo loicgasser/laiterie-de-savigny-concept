@@ -1,0 +1,49 @@
+---
+import config from '../config';
+
+const gaTrackingId = config.analytics.gaTrackingId;
+---
+
+{gaTrackingId && (
+  <div id="cookie-root">
+    <div class="cookie-banner" id="cookieBanner" style="display:none" role="dialog" aria-label="Cookie consent">
+      <p>This site uses cookies for analytics. <a href="/privacy.html">Privacy policy</a></p>
+      <div class="cookie-actions">
+        <button class="cookie-btn-accept" id="cookieAccept">Accept</button>
+        <button class="cookie-btn-decline" id="cookieDecline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ gaTrackingId }}>
+    var consent = localStorage.getItem('cookie_consent');
+    if (consent === 'accepted') {
+      loadGA();
+    } else if (consent !== 'declined') {
+      document.getElementById('cookieBanner').style.display = '';
+    }
+
+    document.getElementById('cookieAccept').addEventListener('click', function () {
+      localStorage.setItem('cookie_consent', 'accepted');
+      document.getElementById('cookieBanner').style.display = 'none';
+      loadGA();
+    });
+
+    document.getElementById('cookieDecline').addEventListener('click', function () {
+      localStorage.setItem('cookie_consent', 'declined');
+      document.getElementById('cookieBanner').style.display = 'none';
+    });
+
+    function loadGA() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaTrackingId;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaTrackingId);
+    }
+  </script>
+)}
