@@ -82,17 +82,23 @@ const categories = [
   <!-- ═══════ HERO ═══════ -->
   <section class="hero" id="accueil">
     <div class="container hero-layout">
-      <p class="hero-eyebrow">Savigny, Vaud</p>
+      <p class="hero-eyebrow">Savigny, Vaud — commerce de proximité</p>
       <h1>
         La laiterie<br />
         du village
       </h1>
+      <div class="hero-rule" aria-hidden="true"></div>
       <p class="hero-description">
-        Fromages à la coupe, produits laitiers, fruits et légumes de saison, et un coin épicerie avec des produits de la région. De quoi faire ses courses simplement, au village.
+        Fromages à la coupe, produits laitiers, fruits et légumes de saison, épicerie de terroir. Un vrai magasin de village, ouvert du lundi au samedi.
       </p>
+      <div class="hero-details">
+        <span>Rte des Miguettes 1, 1073 Savigny</span>
+        <span class="hero-sep" aria-hidden="true">/</span>
+        <span>021 781 20 56</span>
+      </div>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Passer nous voir</a>
-        <a href="#produits" class="btn btn-secondary">Nos produits</a>
+        <a href="#contact" class="btn btn-primary">Nous rendre visite</a>
+        <a href="#produits" class="btn btn-secondary">Découvrir nos produits</a>
       </div>
     </div>
   </section>
@@ -249,39 +255,64 @@ const categories = [
 <style>
   /* ── Hero ── */
   .hero {
-    padding: var(--space-4xl) 0;
+    padding: var(--space-4xl) 0 var(--space-3xl);
   }
 
   .hero-layout {
-    max-width: 700px;
+    max-width: 680px;
   }
 
   .hero-eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     color: var(--text-muted);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.2s forwards;
   }
 
   .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    line-height: 1.2;
-    margin-bottom: 32px;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    line-height: 1.12;
+    margin-bottom: 0;
+    letter-spacing: -0.03em;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.3s forwards;
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 1px;
+    background: var(--text);
+    margin: 32px 0;
+    opacity: 0;
+    animation: fade-up 0.7s var(--ease-out) 0.35s forwards;
   }
 
   .hero-description {
     font-size: 1.05rem;
     line-height: 1.8;
     color: var(--text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    max-width: 520px;
     opacity: 0;
     animation: fade-up 0.7s var(--ease-out) 0.4s forwards;
+  }
+
+  .hero-details {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fade-up 0.7s var(--ease-out) 0.45s forwards;
+  }
+
+  .hero-sep {
+    margin: 0 10px;
+    opacity: 0.4;
   }
 
   .hero-actions {
@@ -305,15 +336,19 @@ const categories = [
 
   @media (max-width: 900px) {
     .hero {
-      padding: var(--space-3xl) 0;
+      padding: var(--space-3xl) 0 var(--space-2xl);
     }
 
     .hero h1 {
-      margin-bottom: 24px;
+      margin-bottom: 0;
+    }
+
+    .hero-rule {
+      margin: 24px 0;
     }
 
     .hero-description {
-      margin-bottom: 32px;
+      margin-bottom: 16px;
     }
   }
 
@@ -323,13 +358,23 @@ const categories = [
     }
 
     .hero h1 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+
+    .hero-rule {
+      width: 36px;
+      margin: 20px 0;
     }
 
     .hero-description {
       font-size: 0.95rem;
-      margin-bottom: 28px;
+      margin-bottom: 14px;
+    }
+
+    .hero-details {
+      margin-bottom: 32px;
+      font-size: 0.78rem;
     }
 
     .hero-actions {
